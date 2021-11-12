@@ -7,7 +7,6 @@ export interface Order {
     type: 'buy' | 'sell',
     symbol: string
     price: number
-    avereageExecutedPrice: number
     quantity: number
     executedQuantity: number
     status: 'pending' | 'completed'
@@ -21,7 +20,6 @@ const schema = new Schema<Order>({
     type: { type: String, enum: ['buy', 'sell'], default: 'buy', required: true },
     symbol: { type: String, required: true },
     price: { type: Number, required: true },
-    avereageExecutedPrice: { type: Number, default: 0 },
     quantity: { type: Number, required: true, default: 1, min: 1 },
     executedQuantity: { type: Number, default: 0 },
     status: { type: String, required: true, default: 'pending', enum: ['pending', 'completed'] }
