@@ -1,4 +1,4 @@
-import { Order, OrderModel } from "../models/Order";
+import { Order, OrderModel } from "../models/order";
 
 export const findBuyers = async (order: Order): Promise<Order[]> => {
 
