@@ -1,5 +1,4 @@
 import { Order, OrderModel } from "../models/order";
-import { findBuyers } from "./findBuyers";
 import { findSellers } from "./findSellers";
 import { log } from "./log";
 
