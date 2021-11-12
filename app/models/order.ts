@@ -8,6 +8,9 @@ export interface Order {
     price: number
     quantity: number
     status: 'pending' | 'completed'
+
+    createdAt: Date
+    updatedAt: Date
 }
 
 const schema = new Schema<Order>({
@@ -19,8 +22,8 @@ const schema = new Schema<Order>({
     status: { type: String, required: true, default: 'pending', enum: ['pending', 'completed'] }
 }, { timestamps: true })
 
-schema.post('save', function () {
-    trade(this);
+schema.post('save', async function () {
+    await trade(this);
 });
 
 export const OrderModel = model<Order>('Order', schema);
