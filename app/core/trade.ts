@@ -8,13 +8,11 @@ export const trade = async (order: Order) => {
 
     if (order.type == "sell") {
         let orders = await findBuyers(order)
-        console.log(`[info] found ${orders.length}`)
-        console.log(orders);
     }
 
     if (order.type == "buy") {
         let orders = await findSellers(order)
-        console.log(`[info] found ${orders.length}`)
     }
+
     return
 }

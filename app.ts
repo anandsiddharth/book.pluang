@@ -2,7 +2,6 @@ import express from 'express';
 import { v1 } from './api/v1';
 import { connect } from 'mongoose';
 import bodyParser from 'body-parser'
-import { OrderModel } from './app/models/Order';
 
 const app = express();
 
