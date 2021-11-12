@@ -13,7 +13,7 @@ export const findBuyers = async (order: Order): Promise<Order[]> => {
             FindOrder = await OrderModel.findOne({
                 user: { $ne: order.user },
                 type: 'buy',
-                price: { $gt: order.price },
+                price: { $gte: order.price },
                 quantity: { $gte: order.quantity },
                 status: "pending",
                 symbol: order.symbol
