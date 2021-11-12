@@ -3,6 +3,7 @@ import { trade } from '../core/trade';
 
 export interface Order {
     _id: string
+    orderId: number
     user: number,
     type: 'buy' | 'sell',
     symbol: string
@@ -17,6 +18,7 @@ export interface Order {
 
 const schema = new Schema<Order>({
     user: { type: Number, required: true },
+    orderId: { type: Number, required: true },
     type: { type: String, enum: ['buy', 'sell'], default: 'buy', required: true },
     symbol: { type: String, required: true },
     price: { type: Number, required: true },
