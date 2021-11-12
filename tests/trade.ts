@@ -1,5 +1,6 @@
-import { OrderModel } from "../app/models/order";
+import { Order, OrderModel } from "../app/models/order";
 import { connect } from 'mongoose';
+import { trade } from "../app/core/trade";
 
 const assert = require("assert");
 
@@ -10,9 +11,12 @@ let mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/orders"
 
 describe('orders', function () {
 
+
+
     it("should connect to mongo", async function () {
         await connect(mongoURI)
     })
+
 
     it("should create sample buy order", async function () {
         try {
