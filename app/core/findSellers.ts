@@ -2,17 +2,12 @@ import { Document } from "mongoose";
 import { Order, OrderModel } from "../models/order";
 
 export const findSellers = async (order: Order): Promise<Order[]> => {
-
     let orders: Order[] = []
-
     let quantityCovered = 0;
     let index = 0;
-
     let FindOrder: (Document<any, any, Order> & Order & { _id: string; }) | null = null;
     do {
-
         try {
-
             FindOrder = await OrderModel.findOne({
                 user: { $ne: order.user },
                 type: 'sell',
