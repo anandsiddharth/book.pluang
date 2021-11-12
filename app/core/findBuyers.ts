@@ -15,7 +15,8 @@ export const findBuyers = async (order: Order): Promise<Order[]> => {
                 type: 'buy',
                 price: { $gt: order.price },
                 quantity: { $gte: order.quantity },
-                status: "pending"
+                status: "pending",
+                symbol: order.symbol
             }, {}, { sort: { createdAt: -1 }, skip: index })
 
             if (FindOrder) {
