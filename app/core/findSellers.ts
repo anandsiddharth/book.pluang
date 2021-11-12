@@ -30,5 +30,5 @@ export const findSellers = async (order: Order): Promise<Order[]> => {
 
     } while (FindOrder && quantityCovered == order.quantity)
 
-    return orders;
+    return orders.reverse();
 }
