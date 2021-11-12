@@ -1,3 +1,4 @@
+import { Document } from "mongoose";
 import { Order, OrderModel } from "../models/order";
 
 export const findSellers = async (order: Order): Promise<Order[]> => {
@@ -6,14 +7,16 @@ export const findSellers = async (order: Order): Promise<Order[]> => {
 
     let quantityCovered = 0;
     let index = 0;
-    let FindOrder;
+
+    let FindOrder: (Document<any, any, Order> & Order & { _id: string; }) | null = null;
     do {
+
         try {
 
             FindOrder = await OrderModel.findOne({
                 user: { $ne: order.user },
                 type: 'sell',
-                price: { $gt: order.price },
+                price: { $lte: order.price },
                 quantity: { $gte: order.quantity },
                 status: "pending",
                 symbol: order.symbol
@@ -22,14 +25,12 @@ export const findSellers = async (order: Order): Promise<Order[]> => {
             if (FindOrder) {
                 index++;
                 quantityCovered += FindOrder.quantity
-                orders.push()
+                orders.push(<Order>FindOrder)
             }
-
         } catch (e) {
-            console.error(e);
+            console.log("error", e)
         }
 
-    } while (FindOrder && quantityCovered == order.quantity)
-
+    } while (FindOrder && quantityCovered >= order.quantity)
     return orders.reverse();
 }
