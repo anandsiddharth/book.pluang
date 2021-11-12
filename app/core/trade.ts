@@ -1,19 +1,20 @@
 import { Order, OrderModel } from "../models/Order";
-import { matchBuyer } from "./matchBuyer";
-import { matchSeller } from "./matchSeller";
+import { findBuyers } from "./findBuyers";
+import { findSellers } from "./findSellers";
 
 export const trade = async (order: Order) => {
     console.log(`[info] received TYPE:${order.type} SYM:${order.symbol} QTY:${order.quantity} PRICE:${order.price}`)
     console.log(`[info] finding TYPE:${order.type} SYM:${order.symbol} QTY:${order.quantity} PRICE:${order.price}`)
 
     if (order.type == "sell") {
-        let orders = await matchBuyer(order)
+        let orders = await findBuyers(order)
         console.log(`[info] found ${orders.length}`)
+        console.log(orders);
     }
 
     if (order.type == "buy") {
-        let orders = matchSeller(order)
+        let orders = await findSellers(order)
         console.log(`[info] found ${orders.length}`)
     }
-
+    return
 }
